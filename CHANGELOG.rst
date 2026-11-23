@@ -12,6 +12,8 @@ Added
 
 - ``dtool graph`` command
 - dot format output
+- GitHub Actions workflow that publishes a release to PyPI when a version
+  tag is pushed
 
 
 Changed
