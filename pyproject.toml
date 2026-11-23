@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.27", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dtool_lookup_client_dependency_graph_plugin"
+description = "Dtool plugin for retrieving dependency graph from dtool lookup server"
+readme = "README.rst"
+license = "MIT"
+license-files = ["LICENSE.rst"]
+authors = [
+    {name = "Johannes L. Hörmann", email = "johannes.laurin@gmail.com"},
+]
+requires-python = ">=3.10"
+dynamic = ["version"]
+dependencies = [
+    "asgiref",
+    "click",
+    "requests",
+    "dtoolcore>=3.9.0",
+    "dtool-cli>=0.7.1",
+    "dtool_config>=0.1.1",
+    "dtool-lookup-api>=0.7.0",
+    "pygments",
+]
+
+[project.urls]
+Repository = "https://github.com/jic-dtool/dtool-lookup-client-dependency-graph-plugin"
+
+[project.entry-points."dtool.cli"]
+graph = "dtool_lookup_client_dependency_graph_plugin:graph"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "dtool_lookup_client_dependency_graph_plugin/version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["dtool_lookup_client_dependency_graph_plugin"]
