@@ -1,7 +1,7 @@
 import os
 from setuptools import setup
 
-url = "https://github.com/IMTEK-Simulation/dtool-lookup-client-dependency-graph-plugin"
+url = "https://github.com/jic-dtool/dtool-lookup-client-dependency-graph-plugin"
 readme = open('README.rst').read()
 
 
