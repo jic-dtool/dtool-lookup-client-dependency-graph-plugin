@@ -13,7 +13,7 @@ To install the dtool-lookup-client-dependency-graph-plugin
     pip install dtool-lookup-client-dependency-graph-plugin
 
 This plugin depends on having a `dtool-lookup-server
-<https://github.com/jic-dtool/dtool-lookup-server>`_ with
+<https://github.com/jic-dtool/dservercore>`_ with
 `dtool-lookup-server-dependency-graph-plugin` installed to talk to.
 
 Looking up dpendency graph of dataset by UUID
