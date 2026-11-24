@@ -23,7 +23,11 @@ def graph_to_dot(
         node2style=lambda node: "rounded",
         node2label=lambda node: node,
 ):
-    """Print dot format, adapted from https://github.com/snakemake/snakemake/blob/a4ff3280db0beb4f1a077ee880433f767c4ad142/snakemake/dag.py#L2015C5-L2064C1"""
+    """Print dot format.
+
+    Adapted from
+    https://github.com/snakemake/snakemake/blob/a4ff3280db0beb4f1a077ee880433f767c4ad142/snakemake/dag.py#L2015C5-L2064C1
+    """  # noqa: E501
 
     # color rules
     n = len(graph)
@@ -76,10 +80,12 @@ def graph_to_dot(
     ).format(items="\n".join(nodes + edges))
 
 
-def build_graph_from_dataset_list(datasets, dependency_key=None, root_uuid=None):
+def build_graph_from_dataset_list(datasets, dependency_key=None,
+                                  root_uuid=None):
     """Build graph from list of datasets."""
 
-    logger.debug("Server response on querying dependency graph for UUID = {}.".format(root_uuid))
+    logger.debug("Server response on querying dependency graph for "
+                 "UUID = {}.".format(root_uuid))
 
     graph = defaultdict(set)
     uuid_vertex_dict = dict()
@@ -103,8 +109,10 @@ def build_graph_from_dataset_list(datasets, dependency_key=None, root_uuid=None)
             for parent_uuid in dataset['derived_from']:
                 if is_uuid(parent_uuid):
                     if parent_uuid not in uuid_vertex_dict:
-                        # This UUID is present in the graph but not in the database
-                        logger.debug(f"Add dependency graph vertex of missing dataset '{parent_uuid}'.")
+                        # This UUID is present in the graph but not in the
+                        # database
+                        logger.debug("Add dependency graph vertex of missing "
+                                     f"dataset '{parent_uuid}'.")
                         v = dict(
                             uuid=parent_uuid,
                             name='Dataset does not exist in database.',
@@ -113,7 +121,9 @@ def build_graph_from_dataset_list(datasets, dependency_key=None, root_uuid=None)
                         uuid_vertex_dict[parent_uuid] = v
                         missing_uuids += [parent_uuid]
 
-                    logger.debug(f"Add dependency graph edge between child '{dataset['uuid']}' and parent {parent_uuid}.")
+                    logger.debug("Add dependency graph edge between child "
+                                 f"'{dataset['uuid']}' and parent "
+                                 f"{parent_uuid}.")
                     graph[dataset['uuid']].update([parent_uuid])
                 else:
                     logger.warning(
@@ -122,7 +132,7 @@ def build_graph_from_dataset_list(datasets, dependency_key=None, root_uuid=None)
                                                       dataset['uuid'],
                                                       dataset['name']))
 
-    logger.debug(f"Done building dependency graph.")
+    logger.debug("Done building dependency graph.")
     if len(missing_uuids):
         logger.warning(f"Datasets {missing_uuids} missing in graph.")
 
